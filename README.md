@@ -9,11 +9,19 @@
 
 <b>1. Installing Docker 17.03 on all the cluster of nodes:</b>
 
-                $curl -sSL https://get.docker.com/ | sh
+                $curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+                $sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+                $sudo apt-get update
+                $apt-cache policy docker-ce
+                $sudo apt-get install -y docker-ce
+                $sudo systemctl status docker
+                $sudo usermod -aG docker ${USER}
+                $su - ${USER}
+                $id -nG
 
 <b>2. Setting up Swarm Mode Cluster:</b>
 
-<b>On Master Node:</b>
+<b>-On Master Node:</b>
 
               $docker swarm init --listen-addr <master-ip>:2377 --advertise-addr <master-ip>:2377
 
@@ -27,7 +35,7 @@
               /bin/docker-compose
               $chmod +x /usr/local/bin/docker-compose
 
-<b> Pulling the Repository </b>
+<b>Pulling the Repository </b>
 
 Login to master node and pull the repository:
 
